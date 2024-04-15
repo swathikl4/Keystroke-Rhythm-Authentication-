@@ -1,0 +1,1501 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Keystroke Rhythm Prediction & Authorization App</title>
+    <meta property="og:title" content="Keystroke Rhythm Prediction & Authorization App" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+        
+      }
+   form {
+            margin-top: 20px;
+            padding: 40px;
+            border: 2px solid #ebe7f2;
+            border-radius: 5px;
+            background-color: #3740e9;
+            display: inline-block;
+            /*background-image:linear-gradient(rgb(130, 74, 251),white);
+            background-image:url("img1.jpg");
+            background-repeat: no-repeat;
+            background-size:cover;*/
+            background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+                }
+        input[type="file"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #06000f;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+        button:hover {
+            background-color: #0056b3;
+
+        }
+        :root {
+          --dl-color-gray-500: #595959;
+          --dl-color-gray-700: #999999;
+          --dl-color-gray-900: #D9D9D9;
+          --dl-size-size-large: 144px;
+          --dl-size-size-small: 48px;
+          --dl-color-danger-300: #A22020;
+          --dl-color-danger-500: #BF2626;
+          --dl-color-danger-700: #E14747;
+          --dl-color-gray-black: #000000;
+          --dl-color-gray-white: #FFFFFF;
+          --dl-size-size-medium: 96px;
+          --dl-size-size-xlarge: 192px;
+          --dl-size-size-xsmall: 16px;
+          --dl-space-space-unit: 16px;
+          --dl-color-primary-100: #003EB3;
+          --dl-color-primary-300: #0074F0;
+          --dl-color-primary-500: #14A9FF;
+          --dl-color-primary-700: #85DCFF;
+          --dl-color-success-300: #199033;
+          --dl-color-success-500: #32A94C;
+          --dl-color-success-700: #4CC366;
+          --dl-size-size-xxlarge: 288px;
+          --dl-size-size-maxwidth: 1400px;
+          --dl-radius-radius-round: 50%;
+          --dl-color-custom-accent1: #C9B8F9;
+          --dl-space-space-halfunit: 8px;
+          --dl-space-space-sixunits: 96px;
+          --dl-space-space-twounits: 32px;
+          --dl-color-custom-primary1: #222684;
+          --dl-color-custom-primary2: #6466A8;
+          --dl-radius-radius-radius2: 2px;
+          --dl-radius-radius-radius4: 4px;
+          --dl-radius-radius-radius8: 8px;
+          --dl-space-space-fiveunits: 80px;
+          --dl-space-space-fourunits: 64px;
+          --dl-space-space-threeunits: 48px;
+          --dl-color-custom-secondary1: #F1DDD9;
+          --dl-color-custom-neutral-dark: #080A45;
+          --dl-color-custom-neutral-light: #FFFFFF;
+          --dl-space-space-oneandhalfunits: 24px;
+        }
+        .button {
+          color: var(--dl-color-gray-black);
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: var(--dl-color-gray-white);
+        }
+        .input {
+          color: var(--dl-color-gray-black);
+          cursor: auto;
+          padding: 0.5rem 1rem;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: var(--dl-color-gray-white);
+        }
+        .textarea {
+          cursor: auto;
+          padding: 0.5rem;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: white;
+        }
+        .list {
+          width: 100%;
+          margin: 1em 0px 1em 0px;
+          display: block;
+          padding: 0px 0px 0px 1.5rem;
+          list-style-type: none;
+          list-style-position: outside;
+        }
+        .list-item {
+          display: list-item;
+        }
+        .teleport-show {
+          display: flex !important;
+          transform: none !important;
+        }
+        .buttonFilled {
+          color: var(--dl-color-custom-neutral-light);
+          transition: 0.3s;
+          font-family: Bricolage Grotesque;
+          font-weight: bold;
+          padding-top: var(--dl-space-space-halfunit);
+          padding-left: var(--dl-space-space-oneandhalfunits);
+          border-radius: 8px;
+          padding-right: var(--dl-space-space-oneandhalfunits);
+          padding-bottom: var(--dl-space-space-halfunit);
+          background-color: var(--dl-color-custom-primary1);
+        }
+        .buttonFilled:hover {
+          background-color: var(--dl-color-custom-primary2);
+        }
+        .buttonFilledSecondary {
+          color: var(--dl-color-custom-neutral-light);
+          transition: 0.3s;
+          font-family: Bricolage Grotesque;
+          font-weight: bold;
+          padding-top: var(--dl-space-space-halfunit);
+          padding-left: var(--dl-space-space-oneandhalfunits);
+          border-radius: 8px;
+          padding-right: var(--dl-space-space-oneandhalfunits);
+          padding-bottom: var(--dl-space-space-halfunit);
+          background-color: var(--dl-color-custom-primary1);
+        }
+        .buttonFilledSecondary:hover {
+          background-color: var(--dl-color-custom-primary2);
+        }
+        .buttonOutline {
+          color: var(--dl-color-custom-neutral-dark);
+          border: 1px solid;
+          font-family: Bricolage Grotesque;
+          font-weight: bold;
+          padding-top: var(--dl-space-space-halfunit);
+          border-color: var(--dl-color-custom-neutral-dark);
+          padding-left: var(--dl-space-space-oneandhalfunits);
+          border-radius: 8px;
+          padding-right: var(--dl-space-space-oneandhalfunits);
+          padding-bottom: var(--dl-space-space-halfunit);
+        }
+        .buttonOutline:hover {
+          color: var(--dl-color-custom-primary1);
+          border-color: var(--dl-color-custom-primary1);
+        }
+        .buttonFlat {
+          color: var(--dl-color-custom-neutral-dark);
+          font-family: Bricolage Grotesque;
+          font-weight: bold;
+          padding-top: var(--dl-space-space-halfunit);
+          padding-left: var(--dl-space-space-oneandhalfunits);
+          padding-right: var(--dl-space-space-oneandhalfunits);
+          padding-bottom: var(--dl-space-space-halfunit);
+        }
+        .buttonFlat:hover {
+          color: var(--dl-color-custom-accent1);
+        }
+        .featuresContainer {
+          flex: 0 0 auto;
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          background-color: var(--dl-color-custom-secondary1);
+        }
+        .featuresCard {
+          width: 100%;
+          display: flex;
+          padding: var(--dl-space-space-oneandhalfunits);
+          align-items: flex-start;
+          flex-direction: row;
+          justify-content: flex-start;
+          background-color: #E5D2CE;
+        }
+        .featuresIcon {
+          fill: var(--dl-color-custom-neutral-dark);
+          width: 2rem;
+          height: 2rem;
+          flex-shrink: 0;
+          margin-right: var(--dl-space-space-oneandhalfunits);
+        }
+        .freePricingCard {
+          gap: var(--dl-space-space-twounits);
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          padding: var(--dl-space-space-twounits);
+          max-width: 450px;
+          min-height: 450px;
+          align-items: flex-start;
+          flex-direction: column;
+          background-color: var(--dl-color-custom-accent1);
+        }
+        .basicPricingCard {
+          gap: var(--dl-space-space-twounits);
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          padding: var(--dl-space-space-twounits);
+          max-width: 450px;
+          min-height: 450px;
+          align-items: flex-start;
+          flex-direction: column;
+          background-color: var(--dl-color-custom-accent1);
+        }
+        .proPricingCard {
+          gap: var(--dl-space-space-twounits);
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          padding: var(--dl-space-space-twounits);
+          max-width: 450px;
+          min-height: 450px;
+          align-items: flex-start;
+          flex-direction: column;
+          background-color: var(--dl-color-custom-accent1);
+        }
+        .faqContainer {
+          flex: 0 0 auto;
+          color: var(--dl-color-custom-neutral-light);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: center;
+          background-color: var(--dl-color-custom-primary1);
+        }
+        .navbarContainer {
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          position: sticky;
+          align-items: center;
+          padding-top: var(--dl-space-space-oneandhalfunits);
+          padding-left: var(--dl-space-space-threeunits);
+          padding-right: var(--dl-space-space-threeunits);
+          padding-bottom: var(--dl-space-space-oneandhalfunits);
+          justify-content: space-between;
+          background-color: var(--dl-color-custom-neutral-light);
+        }
+        .mobileMenu {
+          color: var(--dl-color-custom-neutral-dark);
+          background-color: var(--dl-color-custom-neutral-light);
+        }
+        .heroContainer {
+          width: 100%;
+          display: flex;
+          min-height: auto;
+          align-items: center;
+          padding-top: var(--dl-space-space-sixunits);
+          padding-left: var(--dl-space-space-threeunits);
+          padding-right: var(--dl-space-space-threeunits);
+          flex-direction: column;
+          padding-bottom: var(--dl-space-space-sixunits);
+          justify-content: center;
+          background: rgb(244,137,183);
+background: linear-gradient(90deg, rgba(244,137,183,1) 0%, rgba(1,104,225,1) 100%);
+
+          background-size: cover;
+        }
+        .pricingContainer {
+          gap: var(--dl-space-space-twounits);
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding-top: var(--dl-space-space-fourunits);
+          padding-left: var(--dl-space-space-threeunits);
+          padding-right: var(--dl-space-space-threeunits);
+          flex-direction: column;
+          padding-bottom: var(--dl-space-space-fourunits);
+          justify-content: center;
+          background-color: var(--dl-color-custom-neutral-light);
+        }
+        .bannerContainer {
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding-top: var(--dl-space-space-sixunits);
+          padding-left: var(--dl-space-space-fiveunits);
+          padding-right: var(--dl-space-space-fiveunits);
+          flex-direction: column;
+          padding-bottom: var(--dl-space-space-sixunits);
+          justify-content: space-between;
+          background-color: var(--dl-color-custom-neutral-light);
+        }
+        .footerContainer {
+          color: var(--dl-color-custom-neutral-dark);
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding-top: var(--dl-space-space-twounits);
+          padding-left: var(--dl-space-space-threeunits);
+          padding-right: var(--dl-space-space-threeunits);
+          flex-direction: column;
+          padding-bottom: var(--dl-space-space-twounits);
+          justify-content: space-between;
+          background-color: var(--dl-color-custom-neutral-light);
+        }
+        .socialIcons {
+          fill: var(--dl-color-custom-neutral-dark);
+        }
+        .Content {
+          font-size: 16px;
+          font-family: Inter;
+          font-weight: 400;
+          line-height: 1.15;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .Heading {
+          font-size: 32px;
+          font-family: Inter;
+          font-weight: 700;
+          line-height: 1.15;
+          text-transform: none;
+          text-decoration: none;
+          
+        }
+        .logo {
+          font-size: 2em;
+          font-family: Bricolage Grotesque;
+          font-weight: 700;
+          line-height: 150%;
+          text-transform: uppercase;
+          
+
+        }
+        .heading1 {
+          font-size: 48px;
+          text-align: center;
+          font-family: Bricolage Grotesque;
+          font-weight: 700;
+          line-height: 150%;
+        }
+        .heading2 {
+          font-size: 35px;
+          font-family: Bricolage Grotesque;
+          font-weight: 600;
+          line-height: 150%;
+        }
+        .heading3 {
+          font-size: 20px;
+          text-align: center;
+          font-family: Bricolage Grotesque;
+          font-weight: 600;
+          line-height: 150%;
+        }
+        .bodyLarge {
+          font-size: 18px;
+          font-family: Bricolage Grotesque;
+          font-weight: 400;
+          line-height: 150%;
+        }
+        .bodySmall {
+          font-size: 16px;
+          font-family: Bricolage Grotesque;
+          font-weight: 400;
+          line-height: 150%;
+        }
+        .overline {
+          font-size: 12px;
+          font-family: Bricolage Grotesque;
+          font-weight: 700;
+          line-height: 150%;
+          text-transform: uppercase;
+        }
+        .question1-container {
+          gap: var(--dl-space-space-unit);
+          flex: 1;
+          width: auto;
+          height: auto;
+          display: flex;
+          position: relative;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .question1-text {
+          font-weight: 700;
+        }
+        
+        .home-container {
+          width: 100%;
+          display: flex;
+          overflow: auto;
+          min-height: 100vh;
+          align-items: center;
+          flex-direction: column;
+        }
+        .home-header {
+          width: 100%;
+          display: flex;
+          z-index: 100;
+          position: fixed;
+          align-items: center;
+          flex-direction: column;
+          background-color: var(--dl-color-gray-white);
+        }
+        .home-desktop-menu {
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+        }
+        .home-links {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: center;
+        }
+        .home-nav22 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-nav32 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-nav42 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-buttons {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .home-login {
+          margin-right: 32px;
+        }
+        .home-burger-menu {
+          display: none;
+        }
+        .home-icon {
+          width: var(--dl-size-size-xsmall);
+          cursor: pointer;
+          height: var(--dl-size-size-xsmall);
+        }
+        .home-mobile-menu1 {
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100vh;
+          display: none;
+          padding: 32px;
+          z-index: 100;
+          position: absolute;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .home-nav {
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .home-top {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          margin-bottom: var(--dl-space-space-threeunits);
+          justify-content: space-between;
+        }
+        .home-close-menu {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-icon02 {
+          width: var(--dl-size-size-xsmall);
+          cursor: pointer;
+          height: var(--dl-size-size-xsmall);
+        }
+        .home-links1 {
+          flex: 0 0 auto;
+          display: flex;
+          align-self: flex-start;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .home-nav121 {
+          margin-bottom: var(--dl-space-space-unit);
+        }
+        .home-nav221 {
+          margin-bottom: var(--dl-space-space-unit);
+        }
+        .home-nav321 {
+          margin-bottom: var(--dl-space-space-unit);
+        }
+        .home-nav421 {
+          margin-bottom: var(--dl-space-space-unit);
+        }
+        .home-buttons1 {
+          display: flex;
+          margin-top: var(--dl-space-space-unit);
+          align-items: center;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .home-icon04 {
+          width: var(--dl-size-size-xsmall);
+          height: var(--dl-size-size-xsmall);
+          margin-right: var(--dl-space-space-twounits);
+        }
+        .home-icon06 {
+          width: var(--dl-size-size-xsmall);
+          height: var(--dl-size-size-xsmall);
+          margin-right: var(--dl-space-space-twounits);
+        }
+        .home-icon08 {
+          width: var(--dl-size-size-xsmall);
+          height: var(--dl-size-size-xsmall);
+        }
+        .home-hero {
+          flex: 0 0 auto;
+          width: 100%;
+          height: auto;
+          display: flex;
+          margin-top: 96px;
+          align-items: flex-start;
+          justify-content: center;
+        }
+        .home-container1 {
+          gap: var(--dl-space-space-oneandhalfunits);
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+        .home-hero-heading {
+          max-width: 800px;
+          text-align: center;
+        }
+        .home-hero-sub-heading {
+          font-size: 18px;
+          text-align: center;
+        }
+        .home-btn-group {
+          gap: var(--dl-space-space-oneandhalfunits);
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+        }
+        .home-features {
+          flex: 0 0 auto;
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-features-container {
+          border: 2px dashed rgba(120, 120, 120, 0.4);
+        }
+        .home-pricing {
+          flex: 0 0 auto;
+          width: 100%;
+          border: 2px dashed rgba(120, 120, 120, 0.4);
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-banner {
+          flex: 0 0 auto;
+          width: 100%;
+          border: 2px dashed rgba(120, 120, 120, 0.4);
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-faq {
+          flex: 0 0 auto;
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-faq1 {
+          gap: var(--dl-space-space-twounits);
+          width: 100%;
+          display: flex;
+          max-width: var(--dl-size-size-maxwidth);
+          align-items: flex-start;
+          padding-top: var(--dl-space-space-fourunits);
+          padding-left: var(--dl-space-space-threeunits);
+          padding-right: var(--dl-space-space-threeunits);
+          flex-direction: row;
+          padding-bottom: var(--dl-space-space-fourunits);
+        }
+        .home-container2 {
+          display: flex;
+          max-width: 35%;
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+        .home-text17 {
+          margin-bottom: var(--dl-space-space-oneandhalfunits);
+        }
+        .home-text18 {
+          text-align: left;
+        }
+        .home-container3 {
+          gap: var(--dl-space-space-oneandhalfunits);
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .home-footer {
+          flex: 0 0 auto;
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-container4 {
+          gap: var(--dl-space-space-unit);
+          display: flex;
+          max-width: var(--dl-size-size-maxwidth);
+          align-items: center;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+        .home-nav1 {
+          flex: 0 0 auto;
+          display: flex;
+          margin-top: 0px;
+          align-items: center;
+          flex-direction: row;
+        }
+        .home-nav222 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-nav322 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-nav422 {
+          margin-left: var(--dl-space-space-unit);
+        }
+        .home-separator {
+          flex: 0 0 auto;
+          width: 100%;
+          height: 0px;
+          display: flex;
+          margin-top: var(--dl-space-space-twounits);
+          align-items: flex-start;
+          margin-left: 0px;
+          border-color: var(--dl-color-gray-900);
+          border-style: solid;
+          border-width: 1px;
+          margin-right: 0px;
+          margin-bottom: var(--dl-space-space-twounits);
+          flex-direction: row;
+          border-top-width: 0px;
+          border-left-width: 0px;
+          border-right-width: 0px;
+        }
+        .home-container5 {
+          flex: 0 0 auto;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .home-icon-group1 {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .home-icon10 {
+          width: 24px;
+          height: 24px;
+          margin-right: var(--dl-space-space-twounits);
+        }
+        .home-icon12 {
+          width: 24px;
+          height: 24px;
+          margin-right: var(--dl-space-space-twounits);
+        }
+        .home-icon14 {
+          width: 24px;
+          height: 24px;
+        }
+        @media(max-width: 991px) {
+          .home-hero1 {
+            flex-direction: column;
+          }
+          .home-container1 {
+            align-items: center;
+            margin-right: 0px;
+            margin-bottom: var(--dl-space-space-twounits);
+            padding-right: 0px;
+          }
+          .home-hero-heading {
+            text-align: center;
+          }
+          .home-hero-sub-heading {
+            text-align: center;
+            padding-left: var(--dl-space-space-threeunits);
+            padding-right: var(--dl-space-space-threeunits);
+          }
+          .home-text18 {
+            text-align: center;
+            padding-left: var(--dl-space-space-threeunits);
+            padding-right: var(--dl-space-space-threeunits);
+          }
+        }
+        @media(max-width: 767px) {
+          .home-navbar-interactive {
+            padding-left: var(--dl-space-space-twounits);
+            padding-right: var(--dl-space-space-twounits);
+          }
+          .home-desktop-menu {
+            display: none;
+          }
+          .home-burger-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .home-nav121 {
+            margin-bottom: var(--dl-space-space-unit);
+          }
+          .home-nav221 {
+            margin-bottom: var(--dl-space-space-unit);
+          }
+          .home-nav321 {
+            margin-bottom: var(--dl-space-space-unit);
+          }
+          .home-nav421 {
+            margin-bottom: var(--dl-space-space-unit);
+          }
+          .home-hero1 {
+            padding-left: var(--dl-space-space-twounits);
+            padding-right: var(--dl-space-space-twounits);
+          }
+          .home-hero-sub-heading {
+            padding-left: var(--dl-space-space-unit);
+            padding-right: var(--dl-space-space-unit);
+          }
+          .home-faq1 {
+            flex-direction: column;
+          }
+          .home-container2 {
+            max-width: 100%;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+          }
+          .home-text18 {
+            padding-left: var(--dl-space-space-unit);
+            padding-right: var(--dl-space-space-unit);
+          }
+          .home-footer1 {
+            padding-left: var(--dl-space-space-twounits);
+            padding-right: var(--dl-space-space-twounits);
+          }
+          .home-separator {
+            margin-top: var(--dl-space-space-oneandhalfunits);
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: var(--dl-space-space-oneandhalfunits);
+          }
+          .home-container5 {
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .home-text21 {
+            margin-bottom: var(--dl-space-space-oneandhalfunits);
+          }
+        }
+        @media(max-width: 479px) {
+          .home-navbar-interactive {
+            padding: var(--dl-space-space-unit);
+          }
+          .home-mobile-menu1 {
+            padding: 16px;
+          }
+          .home-hero1 {
+            padding-top: var(--dl-space-space-twounits);
+            padding-left: var(--dl-space-space-unit);
+            padding-right: var(--dl-space-space-unit);
+            padding-bottom: var(--dl-space-space-twounits);
+          }
+          .home-container1 {
+            margin-bottom: var(--dl-space-space-unit);
+          }
+          .home-btn-group {
+            flex-direction: column;
+          }
+          .home-footer1 {
+            padding: var(--dl-space-space-unit);
+          }
+          .home-separator {
+            margin-top: var(--dl-space-space-oneandhalfunits);
+            margin-bottom: var(--dl-space-space-oneandhalfunits);
+          }
+          .home-container5 {
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .home-text21 {
+            text-align: center;
+            margin-bottom: var(--dl-space-space-oneandhalfunits);
+          }
+        }
+        
+        
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+    <style>
+      @keyframes fade-in-left {
+        0% {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="stylesheet" href="C:\Users\Swathi\OneDrive\Desktop\project\Handover_flask\static\style.css" />
+    <div>
+      <link href="C:\Users\Swathi\OneDrive\Desktop\project\Handover_flask\static\index.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <div class="home-header">
+          <header
+            data-thq="thq-navbar"
+            class="navbarContainer home-navbar-interactive"
+          >
+            <span class="logo">KEYSTROKE RHYTHM</span>
+            <div data-thq="thq-navbar-nav" class="home-desktop-menu">
+                            <div class="home-buttons">
+                
+              </div>
+            </div>
+            <div data-thq="thq-burger-menu" class="home-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="home-icon socialIcons">
+                <path
+                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+                ></path>
+              </svg>
+            </div>
+            <div
+              data-thq="thq-mobile-menu"
+              class="home-mobile-menu1 mobileMenu"
+            >
+              <div class="home-nav">
+                <div class="home-top">
+                  <span class="logo">KEYSTROKE</span>
+                  <div data-thq="thq-close-menu" class="home-close-menu">
+                    <svg
+                      viewBox="0 0 1024 1024"
+                      class="home-icon02 socialIcons"
+                    >
+                      <path
+                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                                <div class="home-buttons1">
+                
+                </div>
+              </div>
+              <div>
+                <svg
+                  viewBox="0 0 950.8571428571428 1024"
+                  class="home-icon04 socialIcons"
+                >
+                  <path
+                    d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
+                  ></path></svg
+                ><svg
+                  viewBox="0 0 877.7142857142857 1024"
+                  class="home-icon06 socialIcons"
+                >
+                  <path
+                    d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
+                  ></path></svg
+                ><svg
+                  viewBox="0 0 602.2582857142856 1024"
+                  class="home-icon08 socialIcons"
+                >
+                  <path
+                    d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </header>
+        </div>
+        <div class="home-hero">
+          <div class="heroContainer home-hero1">
+            <div class="home-container1">
+              <h1 class="home-hero-heading heading1" style="color :#ebe7f2;">
+              Keystroke Rhythm Prediction App
+              </h1>
+              <span class="home-hero-sub-heading bodyLarge" style="color: white;">
+                <span>
+                  <span>
+                    <span>
+                      Secure your account with innovative technology
+                    </span>
+                    <span></span>
+                  </span>
+                  <span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </span>
+                <span>
+                  <span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                  <span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </span>
+              </span>
+              <form action="/predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv" required>
+                <br>
+                <button type="submit">Upload</button>
+            </form>
+            </div>
+          </div>
+        </div>
+        <div class="home-features">
+          <div class="home-features-container featuresContainer"></div>
+        </div>
+        <div class="home-pricing"></div>
+        <div class="home-banner"></div>
+        <div class="home-faq">
+          <div class="faqContainer">
+            <div class="home-faq1">
+              <div class="home-container2">
+                <span class="overline">
+                  <span></span>
+                  <br />
+                </span>
+                <h2 class="home-text17 heading2">Common questions</h2>
+                <span class="home-text18 bodyLarge">
+                  <span>
+                    Here are some of the most common questions that we get.
+                  </span>
+                  <br />
+                </span>
+              </div>
+              <div class="home-container3">
+                <div class="question1-container">
+                  <span class="question1-text heading3">
+                    <span>What is keystroke dynamics authentication?</span>
+                  </span>
+                  <span class="bodySmall">
+                    <span>
+                      Keystroke dynamics authentication is a biometric
+                      authentication method that analyzes the unique typing
+                      patterns of individuals to verify their identity.
+                    </span>
+                  </span>
+                </div>
+                <div class="question1-container">
+                  <span class="question1-text heading3">
+                    <span>
+                      How secure is keystroke dynamics authentication?
+                    </span>
+                  </span>
+                  <span class="bodySmall">
+                    <span>
+                      Keystroke dynamics authentication is considered a highly
+                      secure method as it relies on individual typing patterns
+                      which are difficult to replicate or fake.
+                    </span>
+                  </span>
+                </div>
+                <div class="question1-container">
+                  <span class="question1-text heading3">
+                    <span>
+                      Can keystroke dynamics authentication be used for all
+                      users?
+                    </span>
+                  </span>
+                  <span class="bodySmall">
+                    <span>
+                      Keystroke dynamics authentication may not be suitable for
+                      users with certain disabilities or those who have
+                      inconsistent typing patterns.
+                    </span>
+                  </span>
+                </div>
+                <div class="question1-container">
+                  <span class="question1-text heading3">
+                    <span>
+                      Is keystroke dynamics authentication user-friendly?
+                    </span>
+                  </span>
+                  <span class="bodySmall">
+                    <span>
+                      Keystroke dynamics authentication can be user-friendly
+                      once users get accustomed to the process of typing for
+                      authentication.
+                    </span>
+                  </span>
+                </div>
+                <div class="question1-container">
+                  <span class="question1-text heading3">
+                    <span>
+                      How accurate is keystroke dynamics authentication?
+                    </span>
+                  </span>
+                  <span class="bodySmall">
+                    <span>
+                      Keystroke dynamics authentication can be highly accurate
+                      in verifying user identities based on their unique typing
+                      patterns.
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-footer">
+          <footer class="footerContainer home-footer1">
+            <div class="home-container4">
+              <span class="logo">KEYSTROKE RHYTHM</span>
+              
+            </div>
+            <div class="home-separator"></div>
+            <div class="home-container5">
+              <span class="bodySmall home-text21">
+                © 2024,All Rights Reserved.
+              </span>
+              <div class="home-icon-group1">
+                <svg
+                  viewBox="0 0 950.8571428571428 1024"
+                  class="home-icon10 socialIcons"
+                >
+                  <path
+                    d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
+                  ></path></svg
+                ><svg
+                  viewBox="0 0 877.7142857142857 1024"
+                  class="home-icon12 socialIcons"
+                >
+                  <path
+                    d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
+                  ></path></svg
+                ><svg
+                  viewBox="0 0 602.2582857142856 1024"
+                  class="home-icon14 socialIcons"
+                >
+                  <path
+                    d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script
+      data-section-id="navbar"
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+  </body>
+</html>

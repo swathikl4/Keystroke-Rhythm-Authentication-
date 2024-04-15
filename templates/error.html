@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keystroke Rhythm Prediction & Authorization App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50;
+            padding: 50;
+            /*background-color: #ebe5ec;*/
+            text-align : center;
+            background: rgb(96,49,200);
+background: linear-gradient(90deg, rgba(96,49,200,1) 0%, rgba(3,14,26,1) 100%);
+            
+            
+            background-size: cover;
+            background-repeat: repeat;
+    
+        }
+        
+        h2,p {
+            margin-top: 50px;
+            color: #fefefe;
+            font-family: Verdana, sans-serif;
+            text-shadow: 3px 3px 2px #0b2ad8;
+            
+            
+        }
+        
+        /*form {
+            margin-top: 20px;
+            padding: 40px;
+            border: 2px solid #ebe7f2;
+            border-radius: 5px;
+            background-color: #3740e9;
+            display: inline-block;
+            /*background-image:linear-gradient(rgb(130, 74, 251),white);
+            background-image:url("img1.jpg");
+            background-repeat: no-repeat;
+            background-size:cover;
+            background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+                }
+        input[type="file"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #06000f;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+        button:hover {
+            background-color: #0056b3;
+        }*/
+    </style>
+</head>
+<body>
+    <h1 style="color :#ebe7f2;">
+        Keystroke Rhythm Prediction App
+        </h1>
+    
+    <section>
+        <h2>Prediction failed. Not authorized.<h2>
+            <img src="img1.jpg" alt="image 1" />
+    </section>
+
+    <audio id="alertSound" src="http://localhost:5000/static/alert.mp3" autoplay></audio>
+    <script>
+        // Function to stop the alert sound after a few seconds
+        setTimeout(function() {
+            var audio = document.getElementById('alertSound');
+            audio.pause();
+        }, 50000); // Adjust the duration (in milliseconds) as needed
+    </script>
+    
+</body>
+</html>
